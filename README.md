@@ -5,7 +5,7 @@
 
 <div align="center">
 
-#  🔍 Ethical Hacking Lab: Footprinting & Reconnaissance
+# 🛡️ Penetration Testing Lab : Footprinting & Reconnaissance
 
 **Gathering Domain, DNS, Web Stack & WAF Intelligence with Kali Linux Tools**
 </div>
