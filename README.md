@@ -32,7 +32,7 @@
 ---
 
 ## 📋 Project Overview
-**Reconnaissance (Footprinting)** is the critical first phase of any ethical hacking engagement or penetration test. Before interacting directly with a target system, a security analyst quietly collects publicly available intelligence to map out domain ownership, hosting infrastructure, DNS/mail routing, web technologies, and perimeter defenses—without triggering alerts on the target system.
+**Reconnaissance (Footprinting)** is the critical first phase of any ethical hacking engagement or penetration test. Before interacting directly with a target system, a security analyst quietly collects publicly available intelligence to map out domain ownership, hosting infrastructure, DNS/mail routing, web technologies, and perimeter defenses without triggering alerts on the target system.
 
 In this lab (**Week 2 | Project Module 1**), six built-in **Kali Linux** reconnaissance utilities were executed against `networkwalks.com` to build a comprehensive intelligence profile of the target:
 1. `whois` — Domain registration & registrar intelligence
