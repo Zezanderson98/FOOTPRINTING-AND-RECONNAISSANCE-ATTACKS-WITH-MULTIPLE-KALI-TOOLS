@@ -60,44 +60,26 @@ The purpose of this laboratory is to practice the **reconnaissance (footprinting
 ## 🏗️ Lab Architecture & Network Topology
 The reconnaissance workflow operates from an isolated **Kali Linux** workstation querying public internet infrastructure and the authorized target web server:
 
-```text
-+------------------------------------------+
+```mermaid
+flowchart TD
+    Kali["<b>Kali Linux VM (VirtualBox)</b><br/>• Attacker / Analyst Workstation<br/>• Internal VM IP: 10.0.0.2 (NAT Mode)<br/>• Tools: whois, whatweb, nslookup,<br/>curl, wafw00f, dnsrecon"]
+    
+    NAT["<b>VirtualBox NAT Gateway & Host</b><br/>• Virtual Gateway: 10.0.2.1<br/>• Routes encrypted/public queries to WAN"]
+    
+    DNS["<b>Public Registries & DNS Servers</b><br/>• GoDaddy WHOIS<br/>• HostGator NS (ns6135 / ns6136)<br/>• Google DNS (8.8.8.8)"]
+    
+    Target["<b>Target Web Infrastructure</b><br/>• Domain: networkwalks.com<br/>• Origin IP: 192.232.216.135<br/>• Hosting: HostGator (Bind 9.16.23-RH)<br/>• WAF: ModSecurity (SpiderLabs)<br/>• Stack: Apache + WordPress 7.0.4"]
 
-|        Kali Linux VM (VirtualBox)        |
-|------------------------------------------|
-| • Attacker / Analyst Workstation         |
-| • Internal VM IP: 10.0.2.15 (NAT Mode)   |
-| • Tools: whois, whatweb, nslookup,       |
-|          curl, wafw00f, dnsrecon         |
-+--------------------+---------------------+
-                     |
-                     | Outbound Passive & Active OSINT Queries
-                     | (WHOIS / DNS / HTTP & HTTPS)
-                     v
-+------------------------------------------+
+    Kali -->|"Outbound Passive & Active OSINT Queries<br/>(WHOIS / DNS / HTTP & HTTPS)"| NAT
+    NAT -->|"Public Internet"| DNS
+    NAT -->|"Public Internet"| Target
 
-|      VirtualBox NAT Gateway & Host       |
-|------------------------------------------|
-| • Virtual Gateway: 10.0.2.1              |
-| • Routes encrypted/public queries to WAN |
-+--------------------+---------------------+
-                     |
-                     | Public Internet
-         +-----------+-----------+
-
-         |                       |
-         v                       v
-+---------------------+ +------------------------------------------+
-
-| Public Registries & | |       Target Web Infrastructure          |
-|    DNS Servers      | |------------------------------------------|
-|---------------------| | • Domain: networkwalks.com               |
-| • GoDaddy WHOIS     | | • Origin IP: 192.232.216.135             |
-| • HostGator NS      | | • Hosting: HostGator (Bind 9.16.23-RH)   |
-|   (ns6135 / ns6136) | | • WAF: ModSecurity (SpiderLabs)          |
-| • Google DNS (8.8.8.8)| • Stack: Apache + WordPress 7.0.4        |
-+---------------------+ +------------------------------------------+
+    style Kali fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
+    style NAT fill:#334155,stroke:#94a3b8,stroke-width:2px,color:#f8fafc
+    style DNS fill:#0f172a,stroke:#22c55e,stroke-width:2px,color:#f8fafc
+    style Target fill:#450a0a,stroke:#ef4444,stroke-width:2px,color:#f8fafc
 ```
+
 
 ### Topology Flow Breakdown
 1. **Analyst Workstation (Kali Linux):** Initiates all six reconnaissance commands from an isolated VirtualBox VM configured in **NAT mode (`10.0.0.2`)**.
