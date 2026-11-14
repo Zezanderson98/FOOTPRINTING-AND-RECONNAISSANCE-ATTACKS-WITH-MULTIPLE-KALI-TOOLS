@@ -121,12 +121,14 @@ flowchart TD
 
 
 
-
 * **Observed Findings:**
-  * **Registrar:** GoDaddy.com, LLC
-  * **Creation / Expiry Dates:** Registered `2019-11-06` | Expires `2027-11-06`
-  * **Authoritative Name Servers:** `://hostgator.com`, `://hostgator.com`
-* **Attacker Perspective:** Name servers reveal **HostGator** as the underlying hosting provider, while registration timelines and abuse contacts assist in infrastructure profiling and social engineering planning.
+  * **Domain Name & Registry ID:** `NETWORKWALKS.COM` (`2452319255_DOMAIN_COM-VRSN`)
+  * **Registrar & IANA ID:** `GoDaddy.com, LLC` (`IANA ID: 146`) | WHOIS Server: `://godaddy.com`
+  * **Key Dates:** Created `2019-11-06T22:51:46Z` | Updated `2025-11-12T10:08:43Z` | Expires `2027-11-06T22:51:46Z`
+  * **Authoritative Name Servers:** `://hostgator.com` and `://hostgator.com`
+  * **Domain Status & DNSSEC:** `clientDeleteProhibited`, `clientRenewProhibited`, `clientTransferProhibited`, `clientUpdateProhibited` | `DNSSEC: unsigned`
+  * **Abuse Contacts:** `abuse@godaddy.com` | Phone: `480-624-2505`
+* **Attacker Perspective:** Name servers (`://hostgator.com` and `://hostgator.com`) confirm **HostGator** as the underlying hosting provider, while `DNSSEC: unsigned` indicates DNS responses are not cryptographically signed, and registrar details assist in infrastructure profiling.
 
 ---
 
@@ -144,14 +146,16 @@ flowchart TD
 
 
 
-
-
 * **Observed Findings:**
-  * **Web Server & Hosting Location:** Apache | United States (`192.232.216.135`)
-  * **CMS & Plugins:** **WordPress 7.0.4**, **WP Download Manager 3.3.58**
-  * **Frameworks & Libraries:** Bootstrap 7.0.4, jQuery 3.7.1, HTML5
+  * **HTTP vs. HTTPS Behavior:** Plain HTTP (`http://networkwalks.com`) returned `ERROR Opening: Connection reset by peer`, while HTTPS (`https://networkwalks.com`) returned `[200 OK]`
+  * **Web Server & Hosting Location:** `Apache` | `UNITED STATES [US]` (`192.232.216.135`)
+  * **Page Title & Metadata:** `Networkwalks Academy` | `Open-Graph-Protocol [website]`
+  * **CMS & Plugins:** **WordPress 7.1.4**, **WordPress Download Manager 3.3.76**
+  * **Frameworks, Libraries & Analytics:** `Bootstrap`, `JQuery`, `HTML5`, `Google-Tag-Manager`
+  * **Cookies & Uncommon Headers:** `__wpdm_client` (`HttpOnly`), `permissions-policy`, `link`, `referrer-policy`, `x-endurance-cache-level`, `x-nginx-cache`
   * **Exposed Contact:** `info@networkwalks.com`
-* **Attacker Perspective:** Exposing exact software and plugin versions enables attackers to query CVE and exploit databases for known, unpatched vulnerabilities.
+* **Attacker Perspective:** Exposing exact software and plugin versions (**WordPress 7.1.4** and **WordPress Download Manager 3.3.76**) alongside an administrative email address enables attackers to query CVE databases for version-specific exploits and craft targeted phishing campaigns.
+
 
 ---
 
@@ -173,9 +177,12 @@ flowchart TD
 
 
 
-* **Observed Findings:**
+* * **Observed Findings:**
+  * **DNS Resolver Used:** `192.168.0.1` (`192.168.0.1#53`)
+  * **Query Answer Type:** `Non-authoritative answer`
+  * **Queried Domain:** `networkwalks.com`
   * **Resolved IPv4 Address:** `192.232.216.135`
-* **Attacker Perspective:** Resolving the origin IP allows an attacker to perform direct port scanning, run reverse-IP lookups to find co-hosted domains, and map network boundaries.
+* **Attacker Perspective:** Resolving the origin IP (`192.232.216.135`) allows an attacker to perform direct port scanning, run reverse-IP lookups to find co-hosted domains, and map network boundaries.
 
 ---
 
@@ -197,12 +204,14 @@ flowchart TD
 
 
 
-* **Observed Findings:**
-  * **HTTP Status:** `HTTP/2 200`
-  * **Server & Caching Stack:** `server: Apache`, `x-nginx-cache: WordPress`, `x-endurance-cache-level: 0`
-  * **Exposed API Endpoint:** `</wp-json/>; rel="https://w.org"` (WordPress REST API)
-  * **Cookies & Security Headers:** `__wpdm_client` (`Secure; HttpOnly`), `permissions-policy`, and `referrer-policy`
-* **Attacker Perspective:** HTTP headers reveal backend server architecture, caching configurations, and API endpoints without requiring full page rendering.
+** **Observed Findings:**
+  * **HTTP Status:** `HTTP/1.1 200 OK`
+  * **Timestamp & Content Type:** `Date: Sat, 14 Nov 2026 09:10:17 GMT` | `Content-Type: text/html; charset=UTF-8`
+  * **Server & Caching Stack:** `Server: Apache`, `X-nginx-cache: WordPress`, `X-Endurance-Cache-Level: 0`
+  * **Exposed API Endpoints:** `<https://networkwalks.com/wp-json/>; rel="https://api.w.org/"` and `<https://networkwalks.com/wp-json/wp/v2/pages/53>; rel="alternate"; title="JSON"; type="application/json"` (WordPress REST API)
+  * **Cookies & Security Headers:** `Set-Cookie: __wpdm_client=...; path=/; domain=networkwalks.com; secure; HttpOnly`, `Permissions-Policy` (referencing Google, Cloudflare, and hCaptcha), and `Referrer-Policy: no-referrer-when-downgrade`
+* **Attacker Perspective:** HTTP headers reveal backend server architecture, caching configurations, active plugins (`__wpdm_client` from WP Download Manager), and WordPress REST API endpoints without requiring full page rendering.
+ 
 
 ---
 
@@ -226,9 +235,12 @@ flowchart TD
 
 
 
-* **Observed Findings:**
-  * **WAF Identified:** **ModSecurity (SpiderLabs)**
-* **Attacker Perspective:** Confirming a WAF is present tells the tester that noisy or generic attack payloads will be blocked or logged, shaping subsequent evasion or testing strategies.
+* * **Observed Findings:**
+  * **Tool & Version:** `WAFW00F v2.4.2`
+  * **Target Checked:** `https://networkwalks.com`
+  * **WAF Identified:** **ModSecurity (SpiderLabs)** (`[+] The site https://networkwalks.com is behind ModSecurity (SpiderLabs) WAF.`)
+  * **Probe Count:** `2` requests sent
+* **Attacker Perspective:** Confirming that **ModSecurity (SpiderLabs)** is active with only 2 probes tells the tester that noisy or generic attack payloads will be blocked or logged, shaping subsequent evasion or testing strategies.
 
 ---
 
@@ -249,13 +261,14 @@ flowchart TD
 
 
 
-* **Observed Findings:**
-  * **SOA & Name Servers:** `://hostgator.com` (`50.87.144.87`), `://hostgator.com` (`192.232.216.131`)
-  * **DNS Server Banner:** `Bind 9.16.23-RH`
-  * **Mail Exchange (`MX`):** `://networkwalks.com` (`192.232.216.135`)
-  * **TXT / SPF Records:** `v=spf1 +a +mx +ip4:50.87.144.87 +include:websitewelcome.com ~all` and Google Site Verification token
-  * **Service (`SRV`) Records:** Multiple `_autodiscover._://networkwalks.com` records pointing to `cpanlemaildiscovery.cpanel.net`
-* **Attacker Perspective:** Maps the target's entire DNS, email routing, and cPanel hosting infrastructure while revealing the exact DNS server software version.
+* * **Observed Findings:**
+  * **DNSSEC Status:** `No answer for DNSSEC query for networkwalks.com` (DNSSEC not enabled)
+  * **SOA & Name Servers (`NS`):** `ns6135.hostgator.com` (`50.87.144.87`) and `ns6136.hostgator.com` (`192.232.216.131`)
+  * **DNS Server Banner:** `Bind Version: "9.16.23-RH"` (exposed on both `50.87.144.87` and `192.232.216.131`)
+  * **Address (`A`) & Mail Exchange (`MX`):** `networkwalks.com` (`192.232.216.135`) and `mail.networkwalks.com` (`192.232.216.135`)
+  * **TXT / SPF Records:** `v=spf1 +a +mx +ip4:50.87.144.87 +include:websitewelcome.com ~all` and `google-site-verification=rr04eRmqHoWY3XemnizDNVK4q75X-Ij-mjgEeg-UsYI`
+  * **Service (`SRV`) Records (`8 Records Found`):** Multiple `_autodiscover._tcp.networkwalks.com` records pointing to `cpanelemaildiscovery.cpanel.net` across `184.94.203.x` and `184.94.204.x` on port `443`
+* **Attacker Perspective:** Maps the target's entire DNS, email routing, and cPanel hosting infrastructure while revealing the exact DNS server software version (`Bind 9.16.23-RH`) and unconfigured DNSSEC posture.
 
 ---
 
