@@ -316,6 +316,26 @@ LinkedIn: https://linkedin.com
 
 
 
+## 📊 Project Information Matrix
+
+> **Note:**  
+> This repository contains the complete documentation, environment blueprints, and live verification logs for my Week 02 specialized laboratory deployment focusing on passive and active footprinting, reconnaissance, and attack surface enumeration.
+
+| 🗂️ Project Parameter | ⚙️ Live Deployment Data |
+| :--- | :--- |
+| **Program Track** | Cybersecurity with Ethical Hacking |
+| **Academy Module** | Networkwalks Academy Portfolio Matrix |
+| **Timeline Horizon** | Week 02 Engineering Core |
+| **Project Identity** | Footprinting & Reconnaissance with Multiple Kali Tools |
+| **Target Task ID** | TASK W2-PM1 |
+| **Code Repository** | Public Deployment Hub via GitHub |
+
+
+
+
+
+
+
 
 
 
