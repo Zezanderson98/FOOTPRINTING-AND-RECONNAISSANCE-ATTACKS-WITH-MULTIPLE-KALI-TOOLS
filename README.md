@@ -114,6 +114,14 @@ flowchart TD
   ```bash
   whois networkwalks.com
   ```
+
+
+<img width="1360" height="662" alt="1_whois" src="https://github.com/user-attachments/assets/6028fe3a-a5ca-49d5-bde5-54f049ca3a5b" />
+
+
+
+
+
 * **Observed Findings:**
   * **Registrar:** GoDaddy.com, LLC
   * **Creation / Expiry Dates:** Registered `2019-11-06` | Expires `2027-11-06`
@@ -128,6 +136,16 @@ flowchart TD
   ```bash
   whatweb networkwalks.com
   ```
+
+
+<img width="1360" height="662" alt="2_whatweb" src="https://github.com/user-attachments/assets/4b151bc4-7ff9-43fa-a257-7a066f68143a" />
+
+
+
+
+
+
+
 * **Observed Findings:**
   * **Web Server & Hosting Location:** Apache | United States (`192.232.216.135`)
   * **CMS & Plugins:** **WordPress 7.0.4**, **WP Download Manager 3.3.58**
@@ -143,6 +161,18 @@ flowchart TD
   ```bash
   nslookup networkwalks.com
   ```
+
+
+
+
+<img width="1360" height="662" alt="3_nslookup" src="https://github.com/user-attachments/assets/338c5a00-a89c-4d76-9f4b-ea7801d7e36e" />
+
+
+
+
+
+
+
 * **Observed Findings:**
   * **Resolved IPv4 Address:** `192.232.216.135`
 * **Attacker Perspective:** Resolving the origin IP allows an attacker to perform direct port scanning, run reverse-IP lookups to find co-hosted domains, and map network boundaries.
@@ -155,6 +185,18 @@ flowchart TD
   ```bash
   curl -I https://networkwalks.com
   ```
+
+
+
+
+<img width="1360" height="662" alt="4_curl -I" src="https://github.com/user-attachments/assets/1bda4edd-f7bb-4bac-9043-731e868e285c" />
+
+
+
+
+
+
+
 * **Observed Findings:**
   * **HTTP Status:** `HTTP/2 200`
   * **Server & Caching Stack:** `server: Apache`, `x-nginx-cache: WordPress`, `x-endurance-cache-level: 0`
@@ -170,6 +212,20 @@ flowchart TD
   ```bash
   wafw00f networkwalks.com
   ```
+
+
+
+
+
+<img width="1360" height="662" alt="5_wafw00f" src="https://github.com/user-attachments/assets/8ceec59b-4b82-4e83-9d54-9d324199bce0" />
+
+
+
+
+
+
+
+
 * **Observed Findings:**
   * **WAF Identified:** **ModSecurity (SpiderLabs)**
 * **Attacker Perspective:** Confirming a WAF is present tells the tester that noisy or generic attack payloads will be blocked or logged, shaping subsequent evasion or testing strategies.
@@ -182,6 +238,17 @@ flowchart TD
   ```bash
   dnsrecon -d networkwalks.com
   ```
+
+
+<img width="1360" height="662" alt="6_dnsrecon -d" src="https://github.com/user-attachments/assets/6a8ec93a-a79c-4a51-8f35-465677385e5e" />
+
+
+
+
+
+
+
+
 * **Observed Findings:**
   * **SOA & Name Servers:** `://hostgator.com` (`50.87.144.87`), `://hostgator.com` (`192.232.216.131`)
   * **DNS Server Banner:** `Bind 9.16.23-RH`
